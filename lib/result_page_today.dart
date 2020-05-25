@@ -1,27 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:slimy_card/slimy_card.dart';
 import 'all_constants.dart';
+import 'just_try.dart';
 
-class ResultPage extends StatefulWidget {
+class ResultPageToday extends StatefulWidget {
   @override
-  _ResultPageState createState() => _ResultPageState();
+  _ResultPageTodayState createState() => _ResultPageTodayState();
 }
 
-class _ResultPageState extends State<ResultPage> {
+class _ResultPageTodayState extends State<ResultPageToday> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: kFABColor,
-        onPressed: () {
-          setState(() {
-            Navigator.pop(context);
-          });
-        },
         child: Icon(
-          Icons.arrow_back,
+          Icons.add,
           color: kIconColor,
         ),
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => SingleChildScrollView(
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: InputPage(),
+                    ),
+                  ));
+        },
       ),
       body: StreamBuilder(
         // This streamBuilder reads the real-time status of SlimyCard.
@@ -95,3 +103,20 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 }
+
+//
+//SafeArea(
+//child: Scaffold(
+//floatingActionButton: FloatingActionButton(
+//backgroundColor: kFABColor,
+//onPressed: () {
+//setState(() {
+//Navigator.pop(context);
+//});
+//},
+//child: Icon(
+//Icons.arrow_back,
+//color: kIconColor,
+//),
+//),
+//body:
